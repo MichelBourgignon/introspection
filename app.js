@@ -3,6 +3,9 @@ const drawButton = document.getElementById("drawButton");
 const resetButton = document.getElementById("resetButton");
 const cardCategory = document.getElementById("cardCategory");
 const cardQuestion = document.getElementById("cardQuestion");
+const cardHint = document.getElementById("cardHint");
+const cardExample = document.getElementById("cardExample");
+const categoryFilter = document.getElementById("categoryFilter");
 const cardTools = document.getElementById("cardTools");
 const favoriteButton = document.getElementById("favoriteButton");
 const journalButton = document.getElementById("journalButton");
@@ -18,8 +21,15 @@ let cards = [];
 let remainingCards = [];
 let currentCard = null;
 
+function getFilteredCards() {
+  const selected = categoryFilter.value;
+  return selected === "all"
+    ? cards
+    : cards.filter(card => card.categorie === selected);
+}
+
 function loadDeck() {
-  remainingCards = [...cards];
+  remainingCards = [...getFilteredCards()];
 }
 
 function getRandomCard() {
@@ -37,6 +47,22 @@ function showCard(selected) {
   currentCard = selected;
   cardCategory.textContent = selected.categorie;
   cardQuestion.textContent = selected.question;
+
+  if (selected.aide) {
+    cardHint.textContent = selected.aide;
+    cardHint.classList.remove("hidden");
+  } else {
+    cardHint.textContent = "";
+    cardHint.classList.add("hidden");
+  }
+
+  if (selected.exemple) {
+    cardExample.textContent = selected.exemple;
+    cardExample.classList.remove("hidden");
+  } else {
+    cardExample.textContent = "";
+    cardExample.classList.add("hidden");
+  }
 
   card.classList.remove("flipped");
 
@@ -119,6 +145,23 @@ async function init() {
 
   loadDeck();
   renderJournal();
+
+  const categories = [...new Set(cards.map(card => card.categorie))];
+
+  categories.forEach(category => {
+    const option = document.createElement("option");
+    option.value = category;
+    option.textContent = category;
+    categoryFilter.append(option);
+  });
+
+  categoryFilter.addEventListener("change", () => {
+    loadDeck();
+    currentCard = null;
+    card.classList.remove("flipped");
+    cardTools.classList.add("hidden");
+    journalSection.classList.add("hidden");
+  });
 
   drawButton.addEventListener("click", () => {
     showCard(getRandomCard());

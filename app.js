@@ -199,9 +199,7 @@ async function init() {
   });
 
   card.addEventListener("click", () => {
-    if (currentCard) {
-      card.classList.toggle("flipped");
-    }
+    showCard(getRandomCard());
   });
 
   resetButton.addEventListener("click", () => {

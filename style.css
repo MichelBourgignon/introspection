@@ -52,6 +52,7 @@ textarea{width:100%;margin-top:12px;padding:14px;border-radius:14px;border:1px s
 .advice h2{margin:0 0 10px;font-size:1rem}
 .advice p{margin:0;font-size:.95rem;line-height:1.6}
 .disclaimer{margin-top:14px !important;font-size:.78rem !important;color:var(--muted) !important;line-height:1.5 !important}
+.entry-date{margin-top:8px;font-size:.78rem;color:var(--muted)}
 .saved-advice{margin-top:10px;font-size:.88rem;color:var(--accent);line-height:1.5}
 .crisis-alert{margin-top:24px;padding:20px;border-radius:16px;border:2px solid #d64545;background:rgba(214,69,69,.10);text-align:left}
 .crisis-alert h2{margin:0 0 10px;font-size:1.05rem;color:#ff8080}

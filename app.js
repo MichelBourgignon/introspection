@@ -28,21 +28,71 @@ let remainingCards = [];
 let currentCard = null;
 let explanationsEnabled = localStorage.getItem("introspection-explanations") !== "false";
 
-const adviceRules = [
-  { keywords: ["stress", "anxieux", "anxiété", "peur", "panique", "inquiet", "inquiète", "tension"], advice: "Ton texte semble porter de la tension. Essaie de nommer précisément ce qui te pèse aujourd’hui, puis choisis une seule action très petite pour reprendre un peu de contrôle : respirer cinq minutes, marcher, écrire, ou parler à quelqu’un de confiance." },
-  { keywords: ["triste", "tristesse", "seul", "seule", "vide", "déprimé", "déprimée", "fatigué", "fatiguée", "épuisé", "épuisée"], advice: "Ce que tu décris demande de la douceur. Tu n’as pas besoin de tout régler aujourd’hui : priorise le repos, une activité simple qui te fait du bien, et un contact humain bienveillant. Demander de l’aide est une force, pas un échec." },
-  { keywords: ["colère", "énervé", "énervée", "injuste", "frustré", "frustrée", "agacé", "agacée"], advice: "Ta colère semble signaler qu’une limite ou un besoin important a été touché. Avant d’agir, essaie d’identifier le besoin derrière l’émotion : être respecté, entendu, soutenu ou libre. Une pause peut t’aider à répondre plutôt qu’à réagir." },
-  { keywords: ["confus", "confuse", "perdu", "perdue", "incertain", "incertaine", "doute", "hésite", "hésitation"], advice: "L’incertitude peut être inconfortable, mais elle laisse de la place au choix. Écris deux ou trois options possibles, puis demande-toi laquelle respecte le mieux tes valeurs et ton énergie actuelle." },
-  { keywords: ["fiert", "fier", "fière", "réussi", "réussie", "progress", "content", "contente", "gratitude", "heureux", "heureuse", "joie"], advice: "Il y a quelque chose de positif à reconnaître dans ta réflexion. Prends un instant pour savourer cette progression, et note ce qui t’a aidé à y arriver." },
-  { keywords: ["relation", "famille", "ami", "amie", "amour", "couple", "conflit", "separation", "séparation"], advice: "Les relations peuvent réveiller des besoins profonds. Essaie de distinguer ce qui dépend de toi, ce qui dépend de l’autre, et ce qui peut être exprimé calmement." },
-  { keywords: ["travail", "boulot", "études", "école", "examen", "pression", "charge", "burn", "épuisement"], advice: "Ta charge semble peser. Choisis une priorité réelle plutôt que d’essayer de tout porter, découpe la tâche la plus lourde en une première étape de cinq minutes, et protège un moment de récupération." }
-];
+const adviceThemes = {
+  anxiety: {
+    keywords: ["stress", "anxieux", "anxieuse", "anxiété", "peur", "panique", "inquiet", "inquiète", "tension", "angoisse"],
+    advice: [
+      "Ce que tu décris ressemble à une surcharge émotionnelle. Essaie de séparer ce qui est immédiat de ce qui peut attendre : choisis une seule action concrète pour les prochaines dix minutes, puis reviens au reste plus tard.",
+      "Lorsque l’anxiété prend de la place, essaie de revenir au présent par les sens : nomme cinq choses que tu vois, quatre que tu touches, trois que tu entends. Ensuite, demande-toi quelle est la prochaine étape la plus simple.",
+      "Tu n’as pas besoin de résoudre toute la situation maintenant. Identifie un besoin immédiat — boire, marcher, respirer, parler à quelqu’un — et accorde-toi cette petite pause avant de décider quoi que ce soit."
+    ]
+  },
+  sadness: {
+    keywords: ["triste", "tristesse", "seul", "seule", "vide", "déprimé", "déprimée", "fatigué", "fatiguée", "épuisé", "épuisée", "pleurer", "larme"],
+    advice: [
+      "Ce que tu ressens a le droit d’exister. Pour aujourd’hui, réduis les attentes envers toi-même et choisis une chose douce : un repas simple, une douche, quelques minutes dehors ou un message à une personne sûre.",
+      "La tristesse n’a pas besoin d’être réparée immédiatement. Essaie de lui laisser une place sans la laisser décider de tout : écris ce dont tu aurais besoin si quelqu’un pouvait t’aider, puis regarde s’il existe une toute petite façon de te l’offrir.",
+      "Tu sembles porter beaucoup. Demander du soutien n’est pas un fardeau pour les autres ; c’est une façon de te protéger. Choisis une personne de confiance et dis-lui simplement : « J’ai besoin de parler, même sans solution. »"
+    ]
+  },
+  anger: {
+    keywords: ["colère", "énervé", "énervée", "injuste", "frustré", "frustrée", "agacé", "agacée", "rage", "irrité", "irritée"],
+    advice: [
+      "Ta colère semble indiquer qu’une limite ou un besoin important a été touché. Avant d’agir, essaie de la traduire en besoin : être respecté, entendu, soutenu ou libre. Cela peut t’aider à choisir une réponse plus alignée avec toi.",
+      "Prends une pause avant de répondre, même de quelques minutes. Puis demande-toi : qu’est-ce que je veux protéger dans cette situation, et quelle action respecterait à la fois mes limites et mes valeurs ?",
+      "La frustration peut être une information utile. Écris ce qui s’est passé, ce que tu aurais préféré, et une phrase calme que tu pourrais dire si la situation se reproduit."
+    ]
+  },
+  uncertainty: {
+    keywords: ["confus", "confuse", "perdu", "perdue", "incertain", "incertaine", "doute", "hésite", "hésitation", "choix", "décision"],
+    advice: [
+      "L’incertitude peut être inconfortable, mais elle signifie aussi qu’il reste des possibilités. Écris deux ou trois options, puis identifie celle qui respecte le mieux tes valeurs et ton énergie actuelle — même si elle n’est pas parfaite.",
+      "Tu n’as pas besoin de trouver la réponse définitive aujourd’hui. Choisis une prochaine étape réversible : parler à quelqu’un, recueillir une information, essayer une petite action, puis réévaluer.",
+      "Essaie de distinguer ce que tu sais déjà de ce qui reste inconnu. Souvent, une décision devient plus claire lorsqu’on cesse d’exiger une certitude totale avant d’avancer."
+    ]
+  },
+  positive: {
+    keywords: ["fiert", "fier", "fière", "réussi", "réussie", "progress", "content", "contente", "gratitude", "heureux", "heureuse", "joie", "soulagé", "soulagée"],
+    advice: [
+      "Il y a quelque chose de précieux dans ce que tu décris : prends un instant pour le reconnaître sans le minimiser. Note ce qui t’a aidé à arriver là, car cela pourra te soutenir dans un moment plus difficile.",
+      "Ta progression mérite d’être célébrée, même si elle te paraît petite. Demande-toi quelle habitude, quelle personne ou quelle décision t’a aidé, puis garde une trace de cette ressource.",
+      "Profite de cette énergie positive pour identifier une prochaine étape réaliste. Tu n’as pas besoin de tout transformer : choisis une action qui prolonge doucement ce qui te fait du bien."
+    ]
+  },
+  relationships: {
+    keywords: ["relation", "famille", "ami", "amie", "amour", "couple", "conflit", "separation", "séparation", "seul", "seule", "abandon"],
+    advice: [
+      "Les relations peuvent réveiller des besoins profonds. Essaie de séparer ce qui dépend de toi, ce qui dépend de l’autre, et ce qui peut être exprimé calmement. Une phrase honnête peut parfois ouvrir un espace de compréhension.",
+      "Avant de tirer une conclusion sur la relation, demande-toi quel besoin n’est pas entendu : sécurité, respect, attention, liberté ou réassurance. Cela peut t’aider à formuler une demande plus claire.",
+      "Tu as le droit de protéger ton bien-être tout en restant ouvert·e au dialogue. Choisis une limite simple et une phrase respectueuse que tu pourrais dire si la situation se reproduit."
+    ]
+  },
+  overload: {
+    keywords: ["travail", "boulot", "études", "école", "examen", "pression", "charge", "burn", "épuisement", "trop", "débordé", "débordée"],
+    advice: [
+      "Ta charge semble dépasser ce que tu peux porter seul·e aujourd’hui. Choisis une priorité réelle, découpe la tâche la plus lourde en une étape de cinq minutes, puis protège un moment de récupération.",
+      "Tu n’as pas à prouver ta valeur par l’épuisement. Fais la liste de ce qui est urgent, de ce qui peut attendre, et de ce qui peut être demandé à quelqu’un d’autre.",
+      "Essaie de remplacer « je dois tout faire » par : « quelle est la prochaine action la plus utile ? ». Une seule étape terminée peut déjà réduire la pression."
+    ]
+  }
+};
 
 const fallbackAdvice = [
-  "Ta réflexion mérite d’être accueillie sans jugement. Choisis une seule petite action qui te rapproche de ce dont tu as besoin aujourd’hui.",
-  "Essaie de reformuler ce que tu ressens en une phrase simple : « J’ai besoin de… ». Cela peut t’aider à voir plus clairement la prochaine étape.",
-  "Prends quelques respirations lentes, puis demande-toi : qu’est-ce qui est sous mon contrôle maintenant, et qu’est-ce que je peux déposer pour l’instant ?",
-  "Sois aussi bienveillant envers toi-même que tu le serais avec un proche dans la même situation."
+  "Ta réflexion mérite d’être accueillie sans jugement. Demande-toi : quel est le besoin le plus important derrière ce que je ressens, et quelle petite action pourrait y répondre aujourd’hui ?",
+  "Essaie de reformuler ton expérience en une phrase : « Je traverse… et j’ai besoin de… ». Cela peut rendre la prochaine étape plus claire.",
+  "Prends quelques respirations lentes, puis sépare ce qui est sous ton contrôle de ce qui ne l’est pas. Choisis une seule action sur ce que tu peux influencer.",
+  "Sois aussi bienveillant envers toi-même que tu le serais avec un proche dans la même situation. La progression compte souvent plus que la perfection.",
+  "Écris une chose que tu as traversée, une chose que tu as apprise, et une chose que tu veux protéger demain. Cela peut aider à reprendre un peu de perspective."
 ];
 
 const crisisKeywords = [
@@ -98,12 +148,27 @@ function getRandomCard() {
 
 function generateAdvice(text) {
   const normalized = text.toLowerCase();
-  const matchingRules = adviceRules.filter(rule => rule.keywords.some(keyword => normalized.includes(keyword)));
-  if (matchingRules.length === 0) {
+  const matchingThemes = Object.values(adviceThemes).filter(theme =>
+    theme.keywords.some(keyword => normalized.includes(keyword))
+  );
+
+  if (matchingThemes.length === 0) {
     return fallbackAdvice[Math.floor(Math.random() * fallbackAdvice.length)];
   }
-  const rule = matchingRules[Math.floor(Math.random() * matchingRules.length)];
-  return rule.advice;
+
+  const theme = matchingThemes[Math.floor(Math.random() * matchingThemes.length)];
+  return theme.advice[Math.floor(Math.random() * theme.advice.length)];
+}
+
+function formatDate(value) {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  return date.toLocaleDateString("fr-FR", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
+  });
 }
 
 function addTiltEffect() {
@@ -246,6 +311,14 @@ function renderJournal() {
     reflection.textContent = entry.text;
 
     article.append(category, question, reflection);
+
+    const entryDate = formatDate(entry.date);
+    if (entryDate) {
+      const date = document.createElement("p");
+      date.className = "entry-date";
+      date.textContent = `Enregistré le ${entryDate}`;
+      article.append(date);
+    }
 
     if (entry.advice) {
       const advice = document.createElement("p");

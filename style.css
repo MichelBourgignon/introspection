@@ -14,19 +14,18 @@ header p{margin-top:8px;color:var(--muted);font-size:.95rem}
 @keyframes rise{from{transform:translateY(100vh) scale(.8);opacity:0}10%{opacity:.35}90%{opacity:.35}to{transform:translateY(-10vh) scale(1.1);opacity:0}}
 .card-zone{margin-top:56px}
 @keyframes cardIn{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -6px}}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .card{position:relative;width:min(300px,100%);height:400px;margin:0 auto;perspective:1200px;cursor:pointer;animation:cardIn .6s ease both;transition:transform .25s ease,box-shadow .25s ease}
 .card:hover .card-face{box-shadow:0 18px 38px rgba(0,0,0,.22)}
 [data-theme="light"] .card:hover .card-face{box-shadow:0 14px 30px rgba(70,50,30,.14)}
-.card::after{content:"";position:absolute;inset:0;border-radius:24px;background:radial-gradient(circle at var(--shine-x,50%) var(--shine-y,50%),rgba(255,255,255,.18),transparent 45%);opacity:0;transition:opacity .25s ease;pointer-events:none;z-index:2}
-.card:hover::after{opacity:1}
-.card-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.card-face::after{content:"";position:absolute;inset:0;border-radius:24px;background:radial-gradient(circle at var(--shine-x,50%) var(--shine-y,50%),rgba(255,255,255,.18),transparent 45%);opacity:0;transition:opacity .25s ease;pointer-events:none;z-index:2}
+.card:hover .card-face::after{opacity:1}
+.card-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.7,.2,1);animation:float 5s ease-in-out infinite}
 .card.tilting .card-inner{transition:transform .1s ease}
 .card.flipped .card-inner{transform:rotateY(180deg)}
 .card-face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:32px;border-radius:24px;backface-visibility:hidden;background:var(--surface);border:1px solid var(--border);transition:box-shadow .25s ease}
-.card-front{color:var(--muted);animation:float 5s ease-in-out infinite}
-.card:hover .card-front{animation:none}
+.card-front{color:var(--muted)}
 .card-front span{font-size:1.6rem;color:var(--accent)}
 .card-back{transform:rotateY(180deg)}
 .category{font-size:.72rem;text-transform:uppercase;letter-spacing:.18em;color:var(--accent)}

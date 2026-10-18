@@ -18,12 +18,52 @@ const saveJournalButton = document.getElementById("saveJournalButton");
 const saveStatus = document.getElementById("saveStatus");
 const savedSection = document.getElementById("savedSection");
 const savedEntries = document.getElementById("savedEntries");
+const adviceSection = document.getElementById("adviceSection");
+const adviceText = document.getElementById("adviceText");
 
 let cards = [];
 let explanations = {};
 let remainingCards = [];
 let currentCard = null;
 let explanationsEnabled = localStorage.getItem("introspection-explanations") !== "false";
+
+const adviceRules = [
+  {
+    keywords: ["stress", "anxieux", "anxiété", "peur", "panique", "inquiet", "inquiète", "tension"],
+    advice: "Ton texte semble porter de la tension. Essaie de nommer précisément ce qui te pèse aujourd’hui, puis choisis une seule action très petite pour reprendre un peu de contrôle : respirer cinq minutes, marcher, écrire, ou parler à quelqu’un de confiance."
+  },
+  {
+    keywords: ["triste", "tristesse", "seul", "seule", "vide", "déprimé", "déprimée", "fatigué", "fatiguée", "épuisé", "épuisée"],
+    advice: "Ce que tu décris demande de la douceur. Tu n’as pas besoin de tout régler aujourd’hui : priorise le repos, une activité simple qui te fait du bien, et un contact humain bienveillant. Demander de l’aide est une force, pas un échec."
+  },
+  {
+    keywords: ["colère", "énervé", "énervée", "injuste", "frustré", "frustrée", "agacé", "agacée"],
+    advice: "Ta colère semble signaler qu’une limite ou un besoin important a été touché. Avant d’agir, essaie d’identifier le besoin derrière l’émotion : être respecté, entendu, soutenu ou libre. Une pause peut t’aider à répondre plutôt qu’à réagir."
+  },
+  {
+    keywords: ["confus", "confuse", "perdu", "perdue", "incertain", "incertaine", "doute", "hésite", "hésitation"],
+    advice: "L’incertitude peut être inconfortable, mais elle laisse de la place au choix. Écris deux ou trois options possibles, puis demande-toi laquelle respecte le mieux tes valeurs et ton énergie actuelle. Tu n’as pas besoin d’une réponse parfaite immédiatement."
+  },
+  {
+    keywords: ["fiert", "fier", "fière", "réussi", "réussie", "progress", "content", "contente", "gratitude", "heureux", "heureuse", "joie"],
+    advice: "Il y a quelque chose de positif à reconnaître dans ta réflexion. Prends un instant pour savourer cette progression, et note ce qui t’a aidé à y arriver : tu pourras t’appuyer dessus lors d’un moment plus difficile."
+  },
+  {
+    keywords: ["relation", "famille", "ami", "amie", "amour", "couple", "conflit", "separation", "séparation"],
+    advice: "Les relations peuvent réveiller des besoins profonds. Essaie de distinguer ce qui dépend de toi, ce qui dépend de l’autre, et ce qui peut être exprimé calmement. Une phrase honnête et respectueuse peut parfois ouvrir un espace de compréhension."
+  },
+  {
+    keywords: ["travail", "boulot", "études", "école", "examen", "pression", "charge", "burn", "épuisement"],
+    advice: "Ta charge semble peser. Choisis une priorité réelle plutôt que d’essayer de tout porter, découpe la tâche la plus lourde en une première étape de cinq minutes, et protège un moment de récupération dans ta journée."
+  }
+];
+
+const fallbackAdvice = [
+  "Ta réflexion mérite d’être accueillie sans jugement. Choisis une seule petite action qui te rapproche de ce dont tu as besoin aujourd’hui, même si elle paraît minuscule.",
+  "Essaie de reformuler ce que tu ressens en une phrase simple : « J’ai besoin de… ». Cela peut t’aider à voir plus clairement la prochaine étape.",
+  "Prends quelques respirations lentes, puis demande-toi : qu’est-ce qui est sous mon contrôle maintenant, et qu’est-ce que je peux déposer pour l’instant ?",
+  "Sois aussi bienveillant envers toi-même que tu le serais avec un proche dans la même situation. La progression compte souvent plus que la perfection."
+];
 
 function applyTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
@@ -67,6 +107,20 @@ function getRandomCard() {
   const selected = remainingCards[index];
   remainingCards.splice(index, 1);
   return selected;
+}
+
+function generateAdvice(text) {
+  const normalized = text.toLowerCase();
+  const matchingRules = adviceRules.filter(rule =>
+    rule.keywords.some(keyword => normalized.includes(keyword))
+  );
+
+  if (matchingRules.length === 0) {
+    return fallbackAdvice[Math.floor(Math.random() * fallbackAdvice.length)];
+  }
+
+  const rule = matchingRules[Math.floor(Math.random() * matchingRules.length)];
+  return rule.advice;
 }
 
 function addTiltEffect() {
@@ -158,6 +212,8 @@ function showCard(selected) {
   journalQuestion.textContent = selected.question;
   journalText.value = getSavedReflection(selected.id) || "";
   journalSection.classList.remove("hidden");
+  adviceSection.classList.add("hidden");
+  adviceText.textContent = "";
 
   updateFavoriteButton();
 }
@@ -239,6 +295,8 @@ function renderJournal() {
 
           if (currentCard?.id === entry.cardId) {
             journalText.value = "";
+            adviceSection.classList.add("hidden");
+            adviceText.textContent = "";
           }
 
           renderJournal();
@@ -300,6 +358,7 @@ async function init() {
     card.classList.remove("flipped");
     cardTools.classList.add("hidden");
     journalSection.classList.add("hidden");
+    adviceSection.classList.add("hidden");
   });
 
   drawButton.addEventListener("click", () => {
@@ -316,6 +375,7 @@ async function init() {
     card.classList.remove("flipped");
     cardTools.classList.add("hidden");
     journalSection.classList.add("hidden");
+    adviceSection.classList.add("hidden");
   });
 
   favoriteButton.addEventListener("click", () => {
@@ -345,6 +405,7 @@ async function init() {
 
     if (!text) {
       saveStatus.textContent = "Écris d’abord ta réflexion.";
+      adviceSection.classList.add("hidden");
       return;
     }
 
@@ -358,6 +419,9 @@ async function init() {
     saveJournal(entries);
     renderJournal();
     saveStatus.textContent = "Réflexion enregistrée.";
+
+    adviceText.textContent = generateAdvice(text);
+    adviceSection.classList.remove("hidden");
   });
 }
 

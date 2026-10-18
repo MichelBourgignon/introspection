@@ -145,7 +145,7 @@ function showCard(selected) {
   setTimeout(() => {
     card.classList.add("flipped");
     cardTools.classList.remove("hidden");
-  }, 120);
+  }, 180);
 
   journalQuestion.textContent = selected.question;
   journalText.value = getSavedReflection(selected.id) || "";

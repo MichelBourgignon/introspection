@@ -17,14 +17,16 @@ header p{margin-top:8px;color:var(--muted);font-size:.95rem}
 @keyframes float{0%,100%{translate:0 0}50%{translate:0 -6px}}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .card{position:relative;width:min(300px,100%);height:400px;margin:0 auto;perspective:1200px;cursor:pointer;animation:cardIn .6s ease both;transition:transform .25s ease,box-shadow .25s ease}
-.card:hover .card-face{box-shadow:0 18px 38px rgba(0,0,0,.22)}
-[data-theme="light"] .card:hover .card-face{box-shadow:0 14px 30px rgba(70,50,30,.14)}
+.card::before{content:"";position:absolute;left:50%;bottom:-34px;width:70%;height:22px;translate:-50% 0;border-radius:50%;background:radial-gradient(ellipse at center,rgba(0,0,0,.35),transparent 70%);filter:blur(10px);z-index:-1;animation:shadowFloat 5s ease-in-out infinite;pointer-events:none}
+[data-theme="light"] .card::before{background:radial-gradient(ellipse at center,rgba(70,50,30,.20),transparent 70%)}
+@keyframes shadowFloat{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(.9);opacity:.6}}
 .card-face::after{content:"";position:absolute;inset:0;border-radius:24px;background:radial-gradient(circle at var(--shine-x,50%) var(--shine-y,50%),rgba(255,255,255,.18),transparent 45%);opacity:0;transition:opacity .25s ease;pointer-events:none;z-index:2}
 .card:hover .card-face::after{opacity:1}
-.card-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.7,.2,1);animation:float 5s ease-in-out infinite}
+.card-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 1.1s cubic-bezier(.25,.8,.25,1);animation:float 5s ease-in-out infinite}
 .card.tilting .card-inner{transition:transform .1s ease}
 .card.flipped .card-inner{transform:rotateY(180deg)}
-.card-face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:32px;border-radius:24px;backface-visibility:hidden;background:var(--surface);border:1px solid var(--border);transition:box-shadow .25s ease}
+.card-face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:32px;border-radius:24px;backface-visibility:hidden;background:var(--surface);border:1px solid var(--border);transition:box-shadow .25s ease;box-shadow:0 6px 16px rgba(0,0,0,.10)}
+[data-theme="light"] .card-face{box-shadow:0 6px 16px rgba(70,50,30,.08)}
 .card-front{color:var(--muted)}
 .card-front span{font-size:1.6rem;color:var(--accent)}
 .card-back{transform:rotateY(180deg)}

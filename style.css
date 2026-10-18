@@ -128,6 +128,7 @@ header p {
   perspective: 1200px;
   cursor: pointer;
   animation: cardIn 0.6s ease both;
+  transition: transform 0.2s ease;
 }
 
 .card-inner {
@@ -136,6 +137,10 @@ header p {
   height: 100%;
   transform-style: preserve-3d;
   transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.card.tilting .card-inner {
+  transition: transform 0.1s ease;
 }
 
 .card.flipped .card-inner {

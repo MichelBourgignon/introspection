@@ -61,6 +61,22 @@ function getRandomCard() {
   return selected;
 }
 
+function addTiltEffect() {
+  card.addEventListener("mousemove", event => {
+    const rect = card.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+    card.style.transform = `rotateY(${x * 12}deg) rotateX(${-y * 12}deg)`;
+    card.classList.add("tilting");
+  });
+
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "rotateY(0deg) rotateX(0deg)";
+    card.classList.remove("tilting");
+  });
+}
+
 function showCard(selected) {
   currentCard = selected;
   const explanation = getCardExplanation(selected);
@@ -169,6 +185,7 @@ async function init() {
   explanations = await explanationsResponse.json();
 
   initTheme();
+  addTiltEffect();
   loadDeck();
   renderJournal();
 

@@ -77,6 +77,23 @@ function addTiltEffect() {
   });
 }
 
+function createParticles() {
+  const container = document.querySelector(".particles");
+  const count = 25;
+
+  for (let i = 0; i < count; i++) {
+    const particle = document.createElement("span");
+    particle.className = "particle";
+
+    particle.style.left = Math.random() * 100 + "%";
+    particle.style.animationDuration = 8 + Math.random() * 10 + "s";
+    particle.style.animationDelay = Math.random() * 10 + "s";
+    particle.style.opacity = 0.2 + Math.random() * 0.3;
+
+    container.append(particle);
+  }
+}
+
 function showCard(selected) {
   currentCard = selected;
   const explanation = getCardExplanation(selected);
@@ -186,6 +203,7 @@ async function init() {
 
   initTheme();
   addTiltEffect();
+  createParticles();
   loadDeck();
   renderJournal();
 

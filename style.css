@@ -5,6 +5,9 @@
   --muted: #9ca3af;
   --accent: #c7b8ff;
   --border: rgba(255, 255, 255, 0.08);
+  --gradient-start: #0e0e12;
+  --gradient-mid: #1b1530;
+  --gradient-end: #101828;
 }
 
 [data-theme="light"] {
@@ -14,6 +17,9 @@
   --muted: #6b7280;
   --accent: #6d5bd0;
   --border: rgba(0, 0, 0, 0.08);
+  --gradient-start: #f6f6f8;
+  --gradient-mid: #ece7ff;
+  --gradient-end: #e6f0ff;
 }
 
 * {
@@ -25,8 +31,22 @@ body {
   min-height: 100vh;
   font-family: "Inter", "Segoe UI", system-ui, sans-serif;
   color: var(--text);
-  background: var(--bg);
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+  background-size: 300% 300%;
+  animation: gradientMove 18s ease infinite;
   -webkit-font-smoothing: antialiased;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .container {

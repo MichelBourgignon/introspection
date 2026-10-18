@@ -210,7 +210,38 @@ function renderJournal() {
       const reflection = document.createElement("p");
       reflection.textContent = entry.text;
 
-      article.append(category, question, reflection);
+      const deleteButton = document.createElement("button");
+      deleteButton.type = "button";
+      deleteButton.className = "secondary";
+      deleteButton.textContent = "Supprimer ma réponse";
+
+      deleteButton.addEventListener("click", () => {
+        const confirmed = window.confirm(
+          "Supprimer cette réponse de ce navigateur ? Cette action est définitive."
+        );
+
+        if (!confirmed) return;
+
+        try {
+          const remainingEntries = getJournal().filter(
+            item => item.cardId !== entry.cardId
+          );
+
+          saveJournal(remainingEntries);
+
+          if (currentCard?.id === entry.cardId) {
+            journalText.value = "";
+          }
+
+          renderJournal();
+          saveStatus.textContent = "Réponse supprimée.";
+        } catch {
+          saveStatus.textContent =
+            "La suppression a échoué. Réessaie dans quelques instants.";
+        }
+      });
+
+      article.append(category, question, reflection, deleteButton);
       savedEntries.append(article);
     });
 }

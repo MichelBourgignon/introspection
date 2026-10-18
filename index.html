@@ -10,51 +10,16 @@
 <div class="particles" aria-hidden="true"></div>
 <div class="menu-overlay hidden" id="menuOverlay"></div>
 <aside class="side-menu hidden" id="sideMenu" aria-hidden="true">
-  <div class="menu-header">
-    <h2>Menu</h2>
-    <button id="closeMenu" aria-label="Fermer le menu">✕</button>
-  </div>
-  <section class="menu-section">
-    <h3>Cartes favorites</h3>
-    <div id="menuFavorites"></div>
-  </section>
-  <section class="menu-section">
-    <h3>Mes réponses et conseils</h3>
-    <div id="menuEntries"></div>
-  </section>
+<div class="menu-header"><h2>Menu</h2><button id="closeMenu" aria-label="Fermer le menu">✕</button></div>
+<section class="menu-section"><div class="menu-section-header"><h3>Cartes favorites</h3><button id="clearFavorites" class="secondary small">Vider les favoris</button></div><div id="menuFavorites"></div></section>
+<section class="menu-section"><h3>Mes réponses et conseils</h3><div id="menuEntries"></div></section>
 </aside>
 <main class="container">
-<header>
-<div class="top-bar">
-<button id="menuToggle" class="menu-toggle" aria-label="Ouvrir le menu">☰</button>
-<h1>Introspection</h1>
-<div class="header-actions">
-<button id="explanationToggle" class="secondary">Explications</button>
-<button id="themeToggle" class="theme-toggle">☾</button>
-</div>
-</div>
-<p>Une question pour te rencontrer un peu plus.</p>
-</header>
-<section class="card-zone">
-<div class="card" id="card"><div class="card-inner"><div class="card-face card-front"><span>✦</span><p>Tire une carte</p></div><div class="card-face card-back"><span class="category" id="cardCategory"></span><p class="question" id="cardQuestion"></p><p class="hint hidden" id="cardHint"></p><p class="example hidden" id="cardExample"></p></div></div></div>
-<div class="filter"><label for="categoryFilter">Catégorie</label><select id="categoryFilter"><option value="all">Toutes les catégories</option></select></div>
-<div class="actions"><button id="drawButton">Tirer une carte</button><button id="resetButton" class="secondary">Relancer le paquet</button></div>
-<div class="card-tools hidden" id="cardTools"><button id="favoriteButton">☆ Mettre en favori</button><button id="journalButton">Écrire une réflexion</button></div>
-</section>
-<section class="journal hidden" id="journalSection">
-<h2>Ma réflexion</h2>
-<p class="journal-question" id="journalQuestion"></p>
-<textarea id="journalText" rows="6" placeholder="Qu’est-ce que cette question réveille en toi ?"></textarea>
-<button id="saveJournalButton">Enregistrer</button>
-<p id="saveStatus" class="status"></p>
-<div class="advice hidden" id="adviceSection"><h2>Un petit conseil</h2><p id="adviceText"></p><p class="disclaimer">Ce conseil est une invitation à la réflexion, pas un avis médical ou psychologique. Si tu traverses une période difficile, parler à un professionnel de santé peut vraiment aider.</p></div>
-<div class="crisis-alert hidden" id="crisisAlert" role="alert"><h2>Tu n’as pas à traverser ça seul·e</h2><p>Si tu es en danger immédiat ou si tu penses à te faire du mal, contacte maintenant une aide d’urgence :</p><ul class="emergency-list"><li><strong>3114</strong> — Prévention du suicide, 24 h/24 (France)</li><li><strong>15</strong> ou <strong>112</strong> — Urgence médicale / SAMU</li><li><strong>119</strong> — Enfance en danger</li></ul><p>Si tu peux, mets-toi en sécurité, reste près d’une personne de confiance et appelle immédiatement.</p></div>
-</section>
+<header><div class="top-bar"><button id="menuToggle" class="menu-toggle" aria-label="Ouvrir le menu">☰</button><h1>Introspection</h1><div class="header-actions"><button id="explanationToggle" class="secondary">Explications</button><button id="themeToggle" class="theme-toggle">☾</button></div></div><p>Une question pour te rencontrer un peu plus.</p></header>
+<section class="card-zone"><div class="card" id="card"><div class="card-inner"><div class="card-face card-front"><span>✦</span><p>Tire une carte</p></div><div class="card-face card-back"><span class="category" id="cardCategory"></span><p class="question" id="cardQuestion"></p><p class="hint hidden" id="cardHint"></p><p class="example hidden" id="cardExample"></p></div></div></div><div class="filter"><label for="categoryFilter">Catégorie</label><select id="categoryFilter"><option value="all">Toutes les catégories</option></select></div><div class="actions"><button id="drawButton">Tirer une carte</button><button id="resetButton" class="secondary">Relancer le paquet</button></div><div class="card-tools hidden" id="cardTools"><button id="favoriteButton">☆ Mettre en favori</button><button id="journalButton">Écrire une réflexion</button></div></section>
+<section class="journal hidden" id="journalSection"><h2>Ma réflexion</h2><p class="journal-question" id="journalQuestion"></p><textarea id="journalText" rows="6" placeholder="Qu’est-ce que cette question réveille en toi ?"></textarea><button id="saveJournalButton">Enregistrer</button><p id="saveStatus" class="status"></p><div class="advice hidden" id="adviceSection"><h2>Un petit conseil</h2><p id="adviceText"></p><p class="disclaimer">Ce conseil est une invitation à la réflexion, pas un avis médical ou psychologique. Si tu traverses une période difficile, parler à un professionnel de santé peut vraiment aider.</p></div><div class="crisis-alert hidden" id="crisisAlert" role="alert"><h2>Tu n’as pas à traverser ça seul·e</h2><p>Si tu es en danger immédiat ou si tu penses à te faire du mal, contacte maintenant une aide d’urgence :</p><ul class="emergency-list"><li><strong>3114</strong> — Prévention du suicide, 24 h/24 (France)</li><li><strong>15</strong> ou <strong>112</strong> — Urgence médicale / SAMU</li><li><strong>119</strong> — Enfance en danger</li></ul><p>Si tu peux, mets-toi en sécurité, reste près d’une personne de confiance et appelle immédiatement.</p></div></section>
 <section class="saved hidden" id="savedSection"><h2>Mon journal</h2><div id="savedEntries"></div></section>
-<footer class="footer">
-<p>Aucune de tes réflexions n’est conservée par le site : elles restent uniquement dans ton navigateur.</p>
-<p>Ce conseil est une invitation à la réflexion, pas un avis médical ou psychologique. Si tu traverses une période difficile, parler à un professionnel de santé peut vraiment aider.</p>
-</footer>
+<footer class="footer"><p>Aucune de tes réflexions n’est conservée par le site : elles restent uniquement dans ton navigateur.</p><p>Ce conseil est une invitation à la réflexion, pas un avis médical ou psychologique. Si tu traverses une période difficile, parler à un professionnel de santé peut vraiment aider.</p></footer>
 </main>
 <script src="app.js"></script>
 </body>

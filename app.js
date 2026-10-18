@@ -19,6 +19,7 @@ const savedSection = document.getElementById("savedSection");
 const savedEntries = document.getElementById("savedEntries");
 
 let cards = [];
+let explanations = {};
 let remainingCards = [];
 let currentCard = null;
 
@@ -32,6 +33,10 @@ function initTheme() {
   const savedTheme = localStorage.getItem("introspection-theme");
   const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
   applyTheme(savedTheme || (prefersLight ? "light" : "dark"));
+}
+
+function getCardExplanation(card) {
+  return explanations[card.id] || {};
 }
 
 function getFilteredCards() {
@@ -58,19 +63,21 @@ function getRandomCard() {
 
 function showCard(selected) {
   currentCard = selected;
+  const explanation = getCardExplanation(selected);
+
   cardCategory.textContent = selected.categorie;
   cardQuestion.textContent = selected.question;
 
-  if (selected.aide) {
-    cardHint.textContent = selected.aide;
+  if (explanation.aide) {
+    cardHint.textContent = explanation.aide;
     cardHint.classList.remove("hidden");
   } else {
     cardHint.textContent = "";
     cardHint.classList.add("hidden");
   }
 
-  if (selected.exemple) {
-    cardExample.textContent = selected.exemple;
+  if (explanation.exemple) {
+    cardExample.textContent = explanation.exemple;
     cardExample.classList.remove("hidden");
   } else {
     cardExample.textContent = "";
@@ -153,8 +160,13 @@ function renderJournal() {
 }
 
 async function init() {
-  const response = await fetch("cards.json");
-  cards = await response.json();
+  const [cardsResponse, explanationsResponse] = await Promise.all([
+    fetch("cards.json"),
+    fetch("explanations.json")
+  ]);
+
+  cards = await cardsResponse.json();
+  explanations = await explanationsResponse.json();
 
   initTheme();
   loadDeck();

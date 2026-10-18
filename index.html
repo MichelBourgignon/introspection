@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introspection — Tire une carte</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Introspection</h1>
+      <p>Une question pour te rencontrer un peu plus.</p>
+    </header>
+
+    <section class="card-zone">
+      <div class="card" id="card">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <span>✦</span>
+            <p>Tire une carte</p>
+          </div>
+          <div class="card-face card-back">
+            <span class="category" id="cardCategory"></span>
+            <p class="question" id="cardQuestion"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="drawButton">Tirer une carte</button>
+        <button id="resetButton" class="secondary">Relancer le paquet</button>
+      </div>
+
+      <div class="card-tools hidden" id="cardTools">
+        <button id="favoriteButton">☆ Mettre en favori</button>
+        <button id="journalButton">Écrire une réflexion</button>
+      </div>
+    </section>
+
+    <section class="journal hidden" id="journalSection">
+      <h2>Ma réflexion</h2>
+      <p class="journal-question" id="journalQuestion"></p>
+      <textarea id="journalText" rows="6" placeholder="Qu’est-ce que cette question réveille en toi ?"></textarea>
+      <button id="saveJournalButton">Enregistrer</button>
+      <p id="saveStatus" class="status"></p>
+    </section>
+
+    <section class="saved hidden" id="savedSection">
+      <h2>Mon journal</h2>
+      <div id="savedEntries"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

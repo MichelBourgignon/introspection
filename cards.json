@@ -1,0 +1,302 @@
+[
+  {
+    "id": 1,
+    "categorie": "Gratitude",
+    "question": "Quelle a été la dernière chose qui t’a émerveillé ?"
+  },
+  {
+    "id": 2,
+    "categorie": "Gratitude",
+    "question": "Quel petit plaisir de la vie apprécies-tu le plus en ce moment ?"
+  },
+  {
+    "id": 3,
+    "categorie": "Gratitude",
+    "question": "Quelle personne ou quel moment aimerais-tu remercier aujourd’hui ?"
+  },
+  {
+    "id": 4,
+    "categorie": "Gratitude",
+    "question": "Quelle chose simple te rend heureux(se) sans que tu y penses souvent ?"
+  },
+  {
+    "id": 5,
+    "categorie": "Gratitude",
+    "question": "Quel souvenir récent voudrais-tu garder précieusement ?"
+  },
+  {
+    "id": 6,
+    "categorie": "Gratitude",
+    "question": "Quelle capacité de ton corps ou de ton esprit te semble précieuse aujourd’hui ?"
+  },
+  {
+    "id": 7,
+    "categorie": "Émotions",
+    "question": "Quelle émotion as-tu ressentie le plus souvent cette semaine ?"
+  },
+  {
+    "id": 8,
+    "categorie": "Émotions",
+    "question": "Qu’est-ce qui t’apaise quand tu te sens submergé(e) ?"
+  },
+  {
+    "id": 9,
+    "categorie": "Émotions",
+    "question": "Quelle émotion aimerais-tu accueillir avec plus de douceur ?"
+  },
+  {
+    "id": 10,
+    "categorie": "Émotions",
+    "question": "Qu’est-ce qui te donne de l’énergie en ce moment ?"
+  },
+  {
+    "id": 11,
+    "categorie": "Émotions",
+    "question": "Qu’est-ce qui te vide de ton énergie sans que tu t’en rendes compte ?"
+  },
+  {
+    "id": 12,
+    "categorie": "Émotions",
+    "question": "Quand te sens-tu le plus toi-même ?"
+  },
+  {
+    "id": 13,
+    "categorie": "Souvenirs",
+    "question": "Quel souvenir d’enfance te fait encore sourire ?"
+  },
+  {
+    "id": 14,
+    "categorie": "Souvenirs",
+    "question": "Quel lieu te ramène instantanément à un moment important de ta vie ?"
+  },
+  {
+    "id": 15,
+    "categorie": "Souvenirs",
+    "question": "Quelle chanson, odeur ou image évoque un souvenir fort pour toi ?"
+  },
+  {
+    "id": 16,
+    "categorie": "Souvenirs",
+    "question": "Quel conseil aimerais-tu donner à ton moi plus jeune ?"
+  },
+  {
+    "id": 17,
+    "categorie": "Souvenirs",
+    "question": "Quel moment de ta vie t’a le plus fait grandir ?"
+  },
+  {
+    "id": 18,
+    "categorie": "Souvenirs",
+    "question": "Quelle tradition ou habitude aimerais-tu créer pour toi-même ?"
+  },
+  {
+    "id": 19,
+    "categorie": "Relations",
+    "question": "Avec qui te sens-tu le plus libre d’être toi-même ?"
+  },
+  {
+    "id": 20,
+    "categorie": "Relations",
+    "question": "Quelle qualité apprécies-tu le plus chez les personnes que tu aimes ?"
+  },
+  {
+    "id": 21,
+    "categorie": "Relations",
+    "question": "Quelle relation aimerais-tu nourrir davantage ?"
+  },
+  {
+    "id": 22,
+    "categorie": "Relations",
+    "question": "Quelle limite aimerais-tu poser avec plus de sérénité ?"
+  },
+  {
+    "id": 23,
+    "categorie": "Relations",
+    "question": "Qu’est-ce qui te fait sentir vraiment écouté(e) ?"
+  },
+  {
+    "id": 24,
+    "categorie": "Relations",
+    "question": "Quel geste simple pourrais-tu offrir à quelqu’un cette semaine ?"
+  },
+  {
+    "id": 25,
+    "categorie": "Avenir",
+    "question": "Si tu pouvais choisir une direction pour les prochains mois, laquelle serait-ce ?"
+  },
+  {
+    "id": 26,
+    "categorie": "Avenir",
+    "question": "Quelle petite étape pourrais-tu faire aujourd’hui vers ce qui compte pour toi ?"
+  },
+  {
+    "id": 27,
+    "categorie": "Avenir",
+    "question": "Quelle version de toi-même aimerais-tu découvrir ?"
+  },
+  {
+    "id": 28,
+    "categorie": "Avenir",
+    "question": "Quel rêve mériterait un peu plus d’attention ?"
+  },
+  {
+    "id": 29,
+    "categorie": "Avenir",
+    "question": "Qu’est-ce que tu voudrais avoir essayé dans un an ?"
+  },
+  {
+    "id": 30,
+    "categorie": "Avenir",
+    "question": "Quelle habitude pourrais-tu commencer doucement cette semaine ?"
+  },
+  {
+    "id": 31,
+    "categorie": "Identité",
+    "question": "Quelle valeur guide vraiment tes choix ?"
+  },
+  {
+    "id": 32,
+    "categorie": "Identité",
+    "question": "Quelle qualité chez toi mérite plus de reconnaissance ?"
+  },
+  {
+    "id": 33,
+    "categorie": "Identité",
+    "question": "Qu’est-ce qui te rend unique, même si tu ne le vois pas toujours ?"
+  },
+  {
+    "id": 34,
+    "categorie": "Identité",
+    "question": "Quelle partie de toi-même aimerais-tu explorer davantage ?"
+  },
+  {
+    "id": 35,
+    "categorie": "Identité",
+    "question": "Quelle croyance sur toi-même aimerais-tu questionner ?"
+  },
+  {
+    "id": 36,
+    "categorie": "Identité",
+    "question": "Si tu devais te décrire sans parler de ton travail, que dirais-tu ?"
+  },
+  {
+    "id": 37,
+    "categorie": "Créativité",
+    "question": "Quelle idée t’amuse ou t’inspire en ce moment ?"
+  },
+  {
+    "id": 38,
+    "categorie": "Créativité",
+    "question": "Qu’est-ce que tu créerais si personne ne devait le voir ?"
+  },
+  {
+    "id": 39,
+    "categorie": "Créativité",
+    "question": "Quelle activité te fait perdre la notion du temps ?"
+  },
+  {
+    "id": 40,
+    "categorie": "Créativité",
+    "question": "Quelle forme d’expression aimerais-tu essayer ?"
+  },
+  {
+    "id": 41,
+    "categorie": "Créativité",
+    "question": "Quel projet te donnerait envie de te lever le matin ?"
+  },
+  {
+    "id": 42,
+    "categorie": "Créativité",
+    "question": "Quelle idée pourrais-tu transformer en quelque chose de concret ?"
+  },
+  {
+    "id": 43,
+    "categorie": "Présence",
+    "question": "Qu’as-tu remarqué aujourd’hui que tu aurais pu manquer ?"
+  },
+  {
+    "id": 44,
+    "categorie": "Présence",
+    "question": "Quel son, couleur ou détail autour de toi attire ton attention ?"
+  },
+  {
+    "id": 45,
+    "categorie": "Présence",
+    "question": "Qu’est-ce que tu pourrais ralentir aujourd’hui ?"
+  },
+  {
+    "id": 46,
+    "categorie": "Présence",
+    "question": "Où te sens-tu le plus en paix ?"
+  },
+  {
+    "id": 47,
+    "categorie": "Présence",
+    "question": "Quelle activité te permet de revenir dans l’instant présent ?"
+  },
+  {
+    "id": 48,
+    "categorie": "Présence",
+    "question": "Si tu arrêtais de te presser cinq minutes, que remarquerais-tu ?"
+  },
+  {
+    "id": 49,
+    "categorie": "Courage",
+    "question": "Quel petit pas te demanderait du courage, mais te ferait du bien ?"
+  },
+  {
+    "id": 50,
+    "categorie": "Courage",
+    "question": "Quelle peur pourrais-tu affronter avec bienveillance ?"
+  },
+  {
+    "id": 51,
+    "categorie": "Courage",
+    "question": "Quand as-tu été fier(ère) de toi récemment ?"
+  },
+  {
+    "id": 52,
+    "categorie": "Courage",
+    "question": "Quelle décision attendrais-tu peut-être depuis trop longtemps ?"
+  },
+  {
+    "id": 53,
+    "categorie": "Courage",
+    "question": "Quel refus pourrais-tu t’autoriser à dire plus facilement ?"
+  },
+  {
+    "id": 54,
+    "categorie": "Courage",
+    "question": "Quelle voix intérieure aimerais-tu écouter davantage ?"
+  },
+  {
+    "id": 55,
+    "categorie": "Repos",
+    "question": "De quoi ton corps ou ton esprit a-t-il besoin aujourd’hui ?"
+  },
+  {
+    "id": 56,
+    "categorie": "Repos",
+    "question": "Quelle forme de repos te convient le mieux ?"
+  },
+  {
+    "id": 57,
+    "categorie": "Repos",
+    "question": "Qu’est-ce que tu pourrais lâcher, même temporairement ?"
+  },
+  {
+    "id": 58,
+    "categorie": "Repos",
+    "question": "Quand te sens-tu vraiment reposé(e) ?"
+  },
+  {
+    "id": 59,
+    "categorie": "Repos",
+    "question": "Quelle routine pourrais-tu simplifier ?"
+  },
+  {
+    "id": 60,
+    "categorie": "Repos",
+    "question": "Quel moment de la journée pourrais-tu rendre plus doux ?"
+  }
+]

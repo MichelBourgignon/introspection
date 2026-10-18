@@ -67,12 +67,14 @@ function addTiltEffect() {
     const x = (event.clientX - rect.left) / rect.width - 0.5;
     const y = (event.clientY - rect.top) / rect.height - 0.5;
 
-    card.style.transform = `rotateY(${x * 12}deg) rotateX(${-y * 12}deg)`;
+    card.style.transform = `perspective(900px) rotateY(${x * 18}deg) rotateX(${-y * 18}deg) scale(1.04)`;
+    card.style.setProperty("--shine-x", `${(x + 0.5) * 100}%`);
+    card.style.setProperty("--shine-y", `${(y + 0.5) * 100}%`);
     card.classList.add("tilting");
   });
 
   card.addEventListener("mouseleave", () => {
-    card.style.transform = "rotateY(0deg) rotateX(0deg)";
+    card.style.transform = "perspective(900px) rotateY(0deg) rotateX(0deg) scale(1)";
     card.classList.remove("tilting");
   });
 }

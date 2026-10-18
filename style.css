@@ -52,9 +52,12 @@ textarea{width:100%;margin-top:12px;padding:14px;border-radius:14px;border:1px s
 .advice h2{margin:0 0 10px;font-size:1rem}
 .advice p{margin:0;font-size:.95rem;line-height:1.6}
 .disclaimer{margin-top:14px !important;font-size:.78rem !important;color:var(--muted) !important;line-height:1.5 !important}
+.saved-advice{margin-top:10px;font-size:.88rem;color:var(--accent);line-height:1.5}
+.crisis-alert{margin-top:24px;padding:20px;border-radius:16px;border:2px solid #d64545;background:rgba(214,69,69,.10);text-align:left}
+.crisis-alert h2{margin:0 0 10px;font-size:1.05rem;color:#ff8080}
+.crisis-alert p{margin:0 0 10px;font-size:.92rem;line-height:1.5}
+.emergency-list{margin:0;padding-left:20px;font-size:.92rem;line-height:1.7}
 .saved-entry{border-top:1px solid var(--border);padding-top:16px;margin-top:16px}
 .saved-entry:first-child{border-top:0;margin-top:0;padding-top:0}
 .footer{margin-top:56px;font-size:.8rem;color:var(--muted);line-height:1.5}
-.filter select{transition:transform .2s ease,border-color .2s ease,color .2s ease}
-.filter select:hover{transform:translateY(-2px)}
 @media(max-width:480px){.container{padding:48px 18px 72px}.card{height:380px}.question{font-size:1.05rem}.header-actions{flex-direction:column;align-items:flex-end}}

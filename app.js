@@ -7,6 +7,7 @@ const cardHint = document.getElementById("cardHint");
 const cardExample = document.getElementById("cardExample");
 const categoryFilter = document.getElementById("categoryFilter");
 const themeToggle = document.getElementById("themeToggle");
+const explanationToggle = document.getElementById("explanationToggle");
 const cardTools = document.getElementById("cardTools");
 const favoriteButton = document.getElementById("favoriteButton");
 const journalButton = document.getElementById("journalButton");
@@ -22,6 +23,7 @@ let cards = [];
 let explanations = {};
 let remainingCards = [];
 let currentCard = null;
+let explanationsEnabled = localStorage.getItem("introspection-explanations") !== "false";
 
 function applyTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
@@ -35,7 +37,13 @@ function initTheme() {
   applyTheme(savedTheme || (prefersLight ? "light" : "dark"));
 }
 
+function updateExplanationToggle() {
+  explanationToggle.textContent = explanationsEnabled ? "Explications : activées" : "Explications : désactivées";
+  explanationToggle.setAttribute("aria-pressed", String(explanationsEnabled));
+}
+
 function getCardExplanation(card) {
+  if (!explanationsEnabled) return {};
   return explanations[card.id] || {};
 }
 
@@ -256,6 +264,7 @@ async function init() {
   explanations = await explanationsResponse.json();
 
   initTheme();
+  updateExplanationToggle();
   addTiltEffect();
   createParticles();
   loadDeck();
@@ -264,6 +273,16 @@ async function init() {
   themeToggle.addEventListener("click", () => {
     const currentTheme = document.documentElement.getAttribute("data-theme");
     applyTheme(currentTheme === "light" ? "dark" : "light");
+  });
+
+  explanationToggle.addEventListener("click", () => {
+    explanationsEnabled = !explanationsEnabled;
+    localStorage.setItem("introspection-explanations", String(explanationsEnabled));
+    updateExplanationToggle();
+
+    if (currentCard) {
+      showCard(currentCard);
+    }
   });
 
   const categories = [...new Set(cards.map(card => card.categorie))];

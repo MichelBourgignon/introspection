@@ -9,7 +9,10 @@
 <body>
   <main class="container">
     <header>
-      <h1>Introspection</h1>
+      <div class="top-bar">
+        <h1>Introspection</h1>
+        <button id="themeToggle" class="theme-toggle" aria-label="Changer de thème">☾</button>
+      </div>
       <p>Une question pour te rencontrer un peu plus.</p>
     </header>
 
@@ -59,6 +62,10 @@
       <h2>Mon journal</h2>
       <div id="savedEntries"></div>
     </section>
+
+    <footer class="footer">
+      <p>Aucune de tes réflexions n’est conservée par le site : elles restent uniquement dans ton navigateur.</p>
+    </footer>
   </main>
 
   <script src="app.js"></script>

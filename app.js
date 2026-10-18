@@ -6,6 +6,7 @@ const cardQuestion = document.getElementById("cardQuestion");
 const cardHint = document.getElementById("cardHint");
 const cardExample = document.getElementById("cardExample");
 const categoryFilter = document.getElementById("categoryFilter");
+const themeToggle = document.getElementById("themeToggle");
 const cardTools = document.getElementById("cardTools");
 const favoriteButton = document.getElementById("favoriteButton");
 const journalButton = document.getElementById("journalButton");
@@ -20,6 +21,18 @@ const savedEntries = document.getElementById("savedEntries");
 let cards = [];
 let remainingCards = [];
 let currentCard = null;
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  themeToggle.textContent = theme === "light" ? "☀" : "☾";
+  localStorage.setItem("introspection-theme", theme);
+}
+
+function initTheme() {
+  const savedTheme = localStorage.getItem("introspection-theme");
+  const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+  applyTheme(savedTheme || (prefersLight ? "light" : "dark"));
+}
 
 function getFilteredCards() {
   const selected = categoryFilter.value;
@@ -143,8 +156,14 @@ async function init() {
   const response = await fetch("cards.json");
   cards = await response.json();
 
+  initTheme();
   loadDeck();
   renderJournal();
+
+  themeToggle.addEventListener("click", () => {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    applyTheme(currentTheme === "light" ? "dark" : "light");
+  });
 
   const categories = [...new Set(cards.map(card => card.categorie))];
 

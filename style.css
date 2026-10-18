@@ -8,7 +8,17 @@ h1{margin:0;font-size:1.8rem;font-weight:600;letter-spacing:-.02em}
 header p{margin-top:8px;color:var(--muted);font-size:.95rem}
 .top-bar{display:flex;align-items:center;justify-content:space-between;gap:16px}
 .header-actions{display:flex;align-items:center;gap:10px}
+.menu-toggle{width:42px;height:42px;padding:0;border-radius:12px;font-size:1.2rem;display:grid;place-items:center}
 .theme-toggle{width:42px;height:42px;padding:0;border-radius:50%;font-size:1.1rem;display:grid;place-items:center}
+.menu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:40}
+.side-menu{position:fixed;top:0;left:0;height:100vh;width:min(340px,88vw);background:var(--surface);border-right:1px solid var(--border);padding:24px;overflow-y:auto;z-index:50;text-align:left}
+.menu-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.menu-header h2{margin:0;font-size:1.1rem}
+.menu-section{margin-bottom:28px}
+.menu-section h3{margin:0 0 12px;font-size:.95rem;color:var(--accent)}
+.menu-item{border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:12px}
+.menu-item p{margin:6px 0 0;font-size:.9rem;line-height:1.5}
+.menu-empty{color:var(--muted);font-size:.9rem}
 .particles{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
 .particle{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--accent);opacity:.35;animation:rise linear infinite}
 [data-theme="light"] .particle{background:#b08d57;opacity:.25}
@@ -61,4 +71,5 @@ textarea{width:100%;margin-top:12px;padding:14px;border-radius:14px;border:1px s
 .saved-entry{border-top:1px solid var(--border);padding-top:16px;margin-top:16px}
 .saved-entry:first-child{border-top:0;margin-top:0;padding-top:0}
 .footer{margin-top:56px;font-size:.8rem;color:var(--muted);line-height:1.5}
+.footer p{margin:6px 0}
 @media(max-width:480px){.container{padding:48px 18px 72px}.card{height:380px}.question{font-size:1.05rem}.header-actions{flex-direction:column;align-items:flex-end}}

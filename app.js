@@ -82,6 +82,7 @@ function addTiltEffect() {
 function createParticles() {
   const container = document.querySelector(".particles");
   const count = 25;
+  const particles = [];
 
   for (let i = 0; i < count; i++) {
     const particle = document.createElement("span");
@@ -93,7 +94,27 @@ function createParticles() {
     particle.style.opacity = 0.2 + Math.random() * 0.3;
 
     container.append(particle);
+    particles.push(particle);
   }
+
+  document.addEventListener("mousemove", event => {
+    particles.forEach(particle => {
+      const rect = particle.getBoundingClientRect();
+      const particleX = rect.left + rect.width / 2;
+      const particleY = rect.top + rect.height / 2;
+
+      const distanceX = particleX - event.clientX;
+      const distanceY = particleY - event.clientY;
+      const distance = Math.hypot(distanceX, distanceY);
+
+      if (distance < 120) {
+        const force = (120 - distance) / 120;
+        particle.style.translate = `${distanceX * force * 0.3}px ${distanceY * force * 0.3}px`;
+      } else {
+        particle.style.translate = "0px 0px";
+      }
+    });
+  });
 }
 
 function showCard(selected) {
